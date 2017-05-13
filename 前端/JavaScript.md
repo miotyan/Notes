@@ -161,48 +161,50 @@ var date_name = new Date('May 8,2017'); //2017年5月8日
   3.定义数组的时候，直接初始化数据：
   var  数组名 = [<元素1>, <元素2>, <元素3>...];
   ```
-- 浏览器对象
-  - window 对象
-    - 计时器
-      - 间隔性触发计时器：每隔一定的时间间隔就触发一次。
-      - 一次性计时器：仅在指定的延迟时间之后触发一次。
-        ```
-        1.
-        setInterval(代码,交互时间);
-        //在执行时,从载入页面后每隔指定的时间（单位毫秒）执行代码。
-        //返回值：一个可以传递给 clearInterval() 从而取消对"代码"的周期性执行的值。
-        clearInterval(id_of_setInterval);
-        //停止计时器
-        //id_of_setInterval：由 setInterval() 返回的 ID 值。
-        2.
-        setTimeout(代码,延迟时间);
-        //在载入后延迟指定时间后,去执行一次表达式,仅执行一次。
-        clearTimeout(id_of_setTimeout);
-        //停止计时器
-        ```
-  - History 对象
-  > history对象记录了用户曾经浏览过的页面(URL)，并可以实现浏览器前进与后退相似导航的功能。从窗口被打开的那一刻开始记录，每个浏览器窗口、每个标签页乃至每个框架，都有自己的history对象与特定的window对象关联。
+### 浏览器对象
+- window 对象
+  - 计时器
+    - 间隔性触发计时器：每隔一定的时间间隔就触发一次。
+    - 一次性计时器：仅在指定的延迟时间之后触发一次。
+      ```
+      1.
+      setInterval(代码,交互时间);
+      //在执行时,从载入页面后每隔指定的时间（单位毫秒）执行代码。
+      //返回值：一个可以传递给 clearInterval() 从而取消对"代码"的周期性执行的值。
+      clearInterval(id_of_setInterval);
+      //停止计时器
+      //id_of_setInterval：由 setInterval() 返回的 ID 值。
+      2.
+      setTimeout(代码,延迟时间);
+      //在载入后延迟指定时间后,去执行一次表达式,仅执行一次。
+      clearTimeout(id_of_setTimeout);
+      //停止计时器
+      ```
+- History 对象
+> history对象记录了用户曾经浏览过的页面(URL)，并可以实现浏览器前进与后退相似导航的功能。从窗口被打开的那一刻开始记录，每个浏览器窗口、每个标签页乃至每个框架，都有自己的history对象与特定的window对象关联。
 
-    - 语法：`window.history.[属性|方法]`
-    - 属性 `length`：返回浏览器历史列表 URL 的数目。
-    - 方法
-      - `back()` 加载 history 列表的前一个 URL，back()相当于go(-1)。
-      - `forward()` 加载 history 列表的下一个 URL，forward()相当于go(1)。
-      - `go()` 加载 history 列表的某个具体的页面
-  - Location 对象
-  > location用于获取或设置窗体的URL，并且可以用于解析URL。
+  - 语法：`window.history.[属性|方法]`
+  - 属性 `length`：返回浏览器历史列表 URL 的数目。
+  - 方法
+    - `back()` 加载 history 列表的前一个 URL，back()相当于go(-1)。
+    - `forward()` 加载 history 列表的下一个 URL，forward()相当于go(1)。
+    - `go()` 加载 history 列表的某个具体的页面
+- Location 对象
+> location用于获取或设置窗体的URL，并且可以用于解析URL。
 
-    - 语法：`location.[属性|方法]`
-    - 属性结构<br />![属性结构](http://img.mukewang.com/53605c5a0001b26909900216.jpg)
-    - 属性<br />![属性](http://img.mukewang.com/5354b1d00001c4ec06220271.jpg)
-    - 方法<br />![方法](http://img.mukewang.com/5354b1eb00016a2405170126.jpg)
-  - Navigator 对象
-  > Navigator 对象包含有关浏览器的信息，通常用于检测浏览器与操作系统的版本。
+  - 语法：`location.[属性|方法]`
+  - 属性结构<br />![属性结构](http://img.mukewang.com/53605c5a0001b26909900216.jpg)
+  - 属性<br />![属性](http://img.mukewang.com/5354b1d00001c4ec06220271.jpg)
+  - 方法<br />![方法](http://img.mukewang.com/5354b1eb00016a2405170126.jpg)
+- Navigator 对象
+> Navigator 对象包含有关浏览器的信息，通常用于检测浏览器与操作系统的版本。
 
-    - 对象属性<br />![属性](http://img.mukewang.com/5354cff70001428b06880190.jpg)
-    - 语法：`navigator.[属性]`
-  - screen 对象
-  >  用于获取用户的屏幕信息。
+  - 对象属性<br />![属性](http://img.mukewang.com/5354cff70001428b06880190.jpg)
+  - 语法：`navigator.[属性]`
+- screen 对象
+>  用于获取用户的屏幕信息。
 
-    - 语法：`window.screen.属性`
-    - 属性<br />![属性](http://img.mukewang.com/5354d2810001a47706210213.jpg)
+  - 语法：`window.screen.属性`
+  - 属性<br />![属性](http://img.mukewang.com/5354d2810001a47706210213.jpg)
+
+### DOM 对象

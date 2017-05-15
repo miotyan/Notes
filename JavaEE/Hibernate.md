@@ -31,3 +31,6 @@
   - `@Test` ：测试方法
   - `@After` : 释放资源
 5. 通过 Hibernate API 编写访问数据库的代码
+
+### Hibernate 进阶
+1. hibernate.cfg.xml 常用配置

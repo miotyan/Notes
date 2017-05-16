@@ -207,4 +207,46 @@ var date_name = new Date('May 8,2017'); //2017年5月8日
   - 语法：`window.screen.属性`
   - 属性<br />![属性](http://img.mukewang.com/5354d2810001a47706210213.jpg)
 
-### DOM 对象
+### DOM
+> 文档对象模型DOM（Document Object Model）定义访问和处理HTML文档的标准方法。
+
+1. `document.getElementsByName()`方法
+> 返回带有指定名称的节点对象的集合。
+
+  - 因为文档中的 name 属性可能不唯一，所有 getElementsByName() 方法返回的是元素的数组，而不是一个元素。
+  - 和数组类似也有length属性，可以和访问数组一样的方法来访问，从0开始。
+2. `document.getElementsByTagName(Tagname)` 方法
+> 返回带有指定标签名的节点对象的集合。返回元素的顺序是它们在文档中的顺序。
+
+  - Tagname是标签的名称，如p、a、img等标签名。
+  - 和数组类似也有length属性，可以和访问数组一样的方法来访问，从0开始。
+3. `elementNode.getAttribute(name)` 方法
+> 通过元素节点的属性名称获取属性的值。
+
+  - elementNode：使用`getElementById()`、`getElementsByTagName()`等方法，获取到的元素节点。
+  - name：要想查询的元素节点的属性名字
+4. `elementNode.setAttribute(name,value)` 方法
+> 增加一个指定名称和值的新属性，或者把一个现有的属性设定为指定的值。
+
+  - name: 要设置的属性名。
+  - value: 要设置的属性值。
+5. 节点属性
+在文档对象模型 (DOM) 中，每个节点都是一个对象。DOM 节点有三个重要的属性 ：
+  - nodeName : 节点的名称,是只读的。
+    1. 元素节点的 nodeName 与标签名相同
+    2. 属性节点的 nodeName 是属性的名称
+    3. 文本节点的 nodeName 永远是 #text
+    4. 文档节点的 nodeName 永远是 #document
+  - nodeValue ：节点的值
+    1. 元素节点的 nodeValue 是 undefined 或 null
+    2. 文本节点的 nodeValue 是文本自身
+    3. 属性节点的 nodeValue 是属性的值
+  - nodeType ：节点的类型，是只读的。常用的几种结点类型:
+
+|元素类型|节点类型|
+|:--------:|:--------:|
+|元素  |1   |
+|属性  |2   |
+|文本  |3   |
+|注释  |8   |
+|文档  |9   |

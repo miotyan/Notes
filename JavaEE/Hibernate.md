@@ -51,5 +51,63 @@
 > hibernate 对数据的操作都是封装在事务中，并且默认是非自动提交的方式。所以用 session 保存对象时，如果不开启事务并且手工提交事务，对象不会真正保存在数据库中。
 
 4. session 详解
+  - 获得 session 对象
+    - openSession
+    - getCurrentSession
+    > 使用 `getCurrentSession` 需要在 `hibernate.cfg.xml` 中进行配置：
+      - 对于本地事务(jdbc事务)，添加 `<property name="hibernate.current_session_context_class">thread</property>`
+      - 对于全局事务(jta事务)，添加 `<property name="hibernate.current_session_context_class">jta</property>`
 
-5. 对象关系映射常用配置
+    - openSession 与 getCurrentSession 的区别
+      1. getCurrentSession 在事务提交或者回滚之后会自动关闭，而 openSession 需要手动关闭。如果使用 openSession 而没有手动关闭，多次之后会导致连接池溢出。
+      2. openSession 每次创建新的 session 对象，getCurrentSession 使用现有的 session 对象。
+5. 对象关系映射常用配置（hbm.xml 配置文件）
+  - mapping 标签
+  ```
+  <hibernate-mapping
+    schema="schemaName"                       //模式名
+    catalog="catalogName"                     //目录名称
+    default-cascade="cascade_style"           //级联风格
+    default-access="field|property|ClassName" //访问策略
+    default-lazy="true|false"                 //加载策略
+    package="packagename"                     //默认包名
+  />
+  ```
+  - class 标签
+  ```
+  <class
+    name="ClassName"          //映射的类
+    table="tableName"         //映射的数据库表
+    batch-size="N"            //抓取策略
+    where="condition"         //抓取条件
+    entity-name="EntityName"  //同一实体类映射多张表
+  />
+  ```
+  - id 标签
+  ```
+  <id                                     //表的主键
+    name="propertyName"                   //映射的属性
+    type="typeName"                       //数据类型
+    column="column_name"                  //映射成数据库字段的名称
+    length="length"                       //指定长度
+    <generator class="generatorClass" />  //主键生成策略
+  </id>
+  ```
+    - 主键生成策略
+
+|标识符生成器|描述|
+|--------|--------|
+|increment|适用于代理主键。由 Hibernate 自动以递增方式生成|
+|identity|适用于代理主键。由底层数据库生成标识符|
+|sequence|适用于代理主键。Hibernate 根据底层数据库的序列生成标识符，要求底层数据库支持序列|
+|native|适用于代理主键。根据底层数据库对自动生成标识符的方式，自动选择 identity、sequence 或 hilo|
+|assigned|适用于自然主键。由 Java 应用程序负责生成标识符|
+
+### Hibernate 单表操作
+1. 单一主键
+  - assigned 手工赋值
+  - native MySQL生成的标识符是 increment，Oracle 则是 sequence。 
+2. 基本类型
+3. 对象类型
+4. 组件属性
+5. 单表操作 CRUD(增删改查) 实例

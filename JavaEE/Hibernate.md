@@ -104,10 +104,46 @@
 |assigned|适用于自然主键。由 Java 应用程序负责生成标识符|
 
 ### Hibernate 单表操作
-1. 单一主键
+- 单一主键
   - assigned 手工赋值
-  - native MySQL生成的标识符是 increment，Oracle 则是 sequence。 
-2. 基本类型
-3. 对象类型
-4. 组件属性
-5. 单表操作 CRUD(增删改查) 实例
+  - native MySQL生成的标识符是 increment，Oracle 则是 sequence。
+- 基本类型
+
+|Hibernate 映射类型|Java 类型|备注|
+|---|---|---|
+|integer/int|java.lang.Integer/int||
+|float|java.lang.Float/float||
+|double|java.lang.Double/double||
+|character|java.lang.Character/java.lang.String/char||
+|string|java.lang.String||
+|boolean/yes_no/true_false|java.lang.Boolean/Boolean||
+|date|java.util.Date/java.sql.Date||
+|time|java.util.Date/java.sql.Time||
+|timestamp|java.util.Date/java.sql.Timestamp|时间戳|
+|calendar|java.util.Calendar||
+|calendar_date|java.util.Calendar|.|
+
+- 对象类型
+
+|Hibernate 映射类型|Java 类型|标准 SQL 类型|MYSQL 类型|备注|
+|---|---|---|---|---|
+|binary|byte[]|VARCHAR(或 BLOB)|BLOB|字节数组|
+|text|java.lang.String|CLOB|TEXT|大文本数据|
+|clob|java.sql.Clob|CLOB|TEXT|大文本数据|
+|blob|java.sql.Blob|BLOB|BLOB|大二进制数据文件|
+- 组件属性
+> 实体类中的某个属性属于用户自定义的类的对象
+
+  对象关系映射文件修改
+```
+<component name="address" class="Address">
+  <property name="postcode" column="POSTCODE"></property>
+  <property name="phone" column="PHONE"></property>
+  <property name="address" column="ADDRESS"></property>
+</component>
+```
+- 单表操作 CRUD(增删改查) 实例
+  - save
+  - update
+  - delete
+  - get/load (查询单个记录)

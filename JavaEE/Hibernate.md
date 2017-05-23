@@ -9,7 +9,7 @@
 3. EJB
 
 ### 编写 Hibernate 例子
-1. 创建 Hibernate 的配置文件
+1. 创建 Hibernate 的配置文件 hibernate.cfg.xml
   ```
   <session-factory>
     <property name="connection.username">root</property>
@@ -23,10 +23,11 @@
     <mapping resource="Students.hbm.xml" />
   </session-factory>
   ```
-2. 创建持久化类
+2. 创建持久化类(实体类)
 > 持久化类是一个普通类，但是要遵循 JavaBean 的原则
 
-3. 创建对象-关系映射文件
+3. 创建对象-关系映射文件(实体.hbm.xml)<br />
+   将文件添加到配置文档中`<mapping resource="Students.hbm.xml" />`
 4. 使用 Junit 进行测试
   - `@Before` : 初始化方法
   - `@Test` ：测试方法
@@ -146,4 +147,7 @@
   - save
   - update
   - delete
-  - get/load (查询单个记录)
+  - get/load (查询单个记录)<br />
+  get 和 load 的区别：
+    1. get 会在调用后立即向数据库发出 sql 语句，返回持久化对象。load 方法会在调用后返回一个代理对象。该代理对象只保存了实体对象的 id ，直到使用对象的非主键属性值时才会发出 sql 语句。
+    2. 查询数据中不存在的数据时， get 方法返回 null ，load 方法抛出异常`org.hibernate.ObjectNotFoundExecption`

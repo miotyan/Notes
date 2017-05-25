@@ -201,6 +201,13 @@ var date_name = new Date('May 8,2017'); //2017年5月8日
 
   - 对象属性<br />![属性](http://img.mukewang.com/5354cff70001428b06880190.jpg)
   - 语法：`navigator.[属性]`
+  - 警告：来自 navigator 对象的信息具有误导性，不应该被用于检测浏览器版本，这是因为：
+    - navigator 数据可被浏览器使用者更改
+    - 浏览器无法报告晚于浏览器发布的新操作系统
+  - 浏览器检测
+    - 由于 navigator 可误导浏览器检测，使用对象检测可用来嗅探不同的浏览器。
+    - 由于不同的浏览器支持不同的对象，您可以使用对象来检测浏览器。例如，由于只有 Opera 支持属性 "window.opera"，您可以据此识别出 Opera。
+    - 例子：if (window.opera) {...some action...}
 - screen 对象
 >  用于获取用户的屏幕信息。
 

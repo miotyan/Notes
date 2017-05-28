@@ -259,3 +259,24 @@
   });
   ```
 - not() 方法返回不匹配标准的所有元素，与 filter() 相反
+
+### AJAX
+- 加载
+  - load() 方法 : 从服务器加载数据，并把返回的数据放入被选元素中<br />
+    语法 ：`$(selector).load(URL,data,callback);`
+    - data 参数规定与请求一同发送的查询字符串键/值对集合
+    - callback 参数是 load() 方法完成后所执行的函数名称。
+    - 也可以把 jQuery 选择器添加到 URL 参数<br />
+      下面的例子把 "demo_test.txt" 文件中 id="p1" 的元素的内容，加载到指定的 <div> 元素中：<br />
+      `$("#div1").load("demo_test.txt #p1"); `
+  - 补充<br />
+    callback 参数规定当 load() 方法完成后所要允许的回调函数。回调函数可以设置不同的参数：
+      - responseTxt  包含调用成功时的结果内容
+      - statusTXT  包含调用的状态
+      - xhr  包含 XMLHttpRequest 对象
+- Get/Post
+  - $.get() 方法 : 通过 HTTP GET 请求从服务器上请求数据<br />
+    语法：`$.get(URL,callback);`
+  - $.post() 方法 : 通过 HTTP POST 请求从服务器上请求数据<br />
+    语法：`$.post(URL,data,callback);`
+      - data 参数规定连同请求发送的数据

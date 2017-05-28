@@ -110,3 +110,152 @@
   .slideUp(2000)
   .slideDown(2000);
   ```
+### jQuery HTML
+- 获得内容和属性
+  - text() 设置或返回所选元素的文本内容
+  - html() 设置或返回所选元素的内容（包括 HTML 标记）
+  - val()  设置或返回表单字段的值
+  - attr() 获取或设置属性值
+  ```
+  $("#btn1").click(function(){
+    alert("Text: " + $("#test").text());
+    alert("HTML: " + $("#test").html());
+    alert("Value: " + $("#test").val());
+    alert($("#w3s").attr("href"));
+  });
+  ```
+- 设置内容和属性
+  - 四个方法同上
+  - 栗子：
+
+  ```
+  $("#btn1").click(function(){
+  $("#test1").text("Hello world!");
+  $("#test2").html("<b>Hello world!</b>");
+  $("#test3").val("Dolly Duck");
+  $("#w3s").attr("href","http://www.w3school.com.cn/jquery");
+  });
+
+  //attr() 方法也允许同时设置多个属性
+  $("button").click(function(){
+  $("#w3s").attr({
+    "href" : "http://www.w3school.com.cn/jquery",
+    "title" : "W3School jQuery Tutorial"
+    });
+  });
+  ```
+- 添加元素
+  - append() ： 在被选元素的结尾插入内容
+  - prepend() ： 在被选元素的开头插入内容
+  - after() ： 在被选元素之后插入内容
+  - before() ： 在被选元素之前插入内容
+  - 高级用法--用以添加 HTML 标签
+  ```
+  function appendText()
+  {
+  var txt1="<p>Text.</p>";              // 以 HTML 创建新元素
+  var txt2=$("<p></p>").text("Text.");  // 以 jQuery 创建新元素
+  var txt3=document.createElement("p"); // 以 DOM 创建新元素
+  txt3.innerHTML="Text.";
+  $("p").append(txt1,txt2,txt3);        // 追加新元素
+  }
+  ```
+- 删除元素
+  - remove()：删除被选元素（及其子元素）
+    - remove() 方法也可接受一个参数，允许您对被删元素进行过滤。
+    - `$("p").remove(".italic"); //删除 class="italic" 的所有 <p> 元素`
+  - empty()： 从被选元素中删除子元素
+- 获取并设置 CSS 类
+  - addClass()  向被选元素添加一个或多个类
+    - 可以在 addClass() 方法中规定多个类：`$("#div1").addClass("important blue");`
+  - removeClass()  从被选元素删除一个或多个类
+  - toggleClass()  对被选元素进行添加/删除类的切换操作
+  - css()  设置或返回样式属性:具体下面介绍
+- jQuery-css() 方法
+> css() 方法设置或返回被选元素的一个或多个样式属性
+
+  - 返回指定的 CSS 属性的值: `css("propertyname");`
+  - 设置指定的 CSS 属性: `css("propertyname","value");`
+  - 设置多个 CSS 属性: `css({"propertyname":"value","propertyname":"value",...});`
+- 尺寸
+> 没有参数时，返回元素的宽度/高度；有参数时，设置元素的宽度/高度。
+
+  - width() 方法设置或返回元素的宽度（不包括内边距、边框或外边距）。
+  - height() 方法设置或返回元素的高度（不包括内边距、边框或外边距）。
+  - innerWidth() 方法返回元素的宽度（包括内边距）。
+  - innerHeight() 方法返回元素的高度（包括内边距）。
+  - outerWidth() 方法返回元素的宽度（包括内边距和边框）。
+  - outerHeight() 方法返回元素的高度（包括内边距和边框）。
+  - outerWidth(true) 方法返回元素的宽度（包括内边距、边框和外边距）。
+  - outerHeight(true) 方法返回元素的高度（包括内边距、边框和外边距）。
+
+### jQuery 遍历
+- 祖先
+  - parent() 方法返回被选元素的直接父元素。
+  - parents() 方法返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (`<html>`)。
+    - 可以使用可选参数来过滤对祖先元素的搜索 `$("span").parents("ul");`
+  - parentsUntil() 方法返回介于两个给定元素之间的所有祖先元素。 `$("span").parentsUntil("div");`
+- 后代
+  - children() 方法返回被选元素的所有直接子元素。
+    - 可以使用可选参数来过滤对子元素的搜索  `$("div").children("p.1"); //返回类名为 "1" 的所有 <p> 元素，并且它们是 <div> 的直接子元素`
+  - find() 方法返回被选元素的后代元素，一路向下直到最后一个后代。
+    - 下面的例子返回属于 `<div>` 后代的所有 `<span>` 元素
+      ```
+      $(document).ready(function(){
+        $("div").find("span");
+      });
+      ```
+    - 下面的例子返回 `<div>` 的所有后代
+      ```
+      $(document).ready(function(){
+        $("div").find("*");
+      });
+      ```
+- 同胞
+  - siblings() 方法返回被选元素的所有同胞元素。
+    ```
+    $(document).ready(function(){
+      $("h2").siblings();  //返回 <h2> 的所有同胞元素
+       $("h2").siblings("p"); //返回属于 <h2> 的同胞元素的所有 <p> 元素
+    });
+    ```
+  - next() 方法返回被选元素的下一个同胞元素。
+    ```
+    $(document).ready(function(){
+      $("h2").next();
+    });
+    ```
+  - nextAll() 方法返回被选元素的所有跟随的同胞元素。
+    ```
+    $(document).ready(function(){
+      $("h2").nextAll();
+    });
+    ```
+  - nextUntil() 方法返回介于两个给定参数之间的所有跟随的同胞元素。
+    ```
+    $(document).ready(function(){
+      $("h2").nextUntil("h6");  //返回介于 <h2> 与 <h6> 元素之间的所有同胞元素，不包括 <h6>
+    });
+    ```
+  - prev(), prevAll() 以及 prevUntil() 方法的工作方式与上面的方法类似，只不过方向相反而已：它们返回的是前面的同胞元素（在 DOM 树中沿着同胞元素向后遍历，而不是向前）。
+- 过滤
+- first() 方法返回被选元素的首个元素
+  ```
+  $(document).ready(function(){
+    $("div p").first();  //选取首个 <div> 元素内部的第一个 <p> 元素
+  });
+  ```
+- last() 方法返回被选元素的最后一个元素
+- eq() 方法返回被选元素中带有指定索引号的元素,索引号从 0 开始，因此首个元素的索引号是 0 而不是 1。
+  ```
+  $(document).ready(function(){
+    $("p").eq(1); //选取第二个 <p> 元素
+  });
+  ```
+- filter() 方法允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回
+  ```
+  $(document).ready(function(){
+    $("p").filter(".intro"); //返回带有类名 "intro" 的所有 <p> 元素
+  });
+  ```
+- not() 方法返回不匹配标准的所有元素，与 filter() 相反

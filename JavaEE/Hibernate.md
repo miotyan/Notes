@@ -156,3 +156,19 @@
 如何实现一对多映射：
   - 数据库中，可以通过添加主外键的关联，表现一对多的关系
   - 在 Hibernate 中，通过在一方持有多方的集合实现，即在“一”的一端中使用`<set>`元素表示持有“多”的一端的对象。
+
+```
+<set name="student" table="student">
+		<!-- 指定关联的外键列 -->
+		<key column="gid"></key>
+		<one-to-many class="com.imooc.entity.Student" />
+</set>
+```
+  - set 元素的常用属性
+
+|属性|含义和作用|必须|默认值|
+|--|--|--|--|
+|name|映射类属性的名称|Y||
+|table|关联类的目标数据库表|N||
+|lazy|指定关联对象是否使用延迟加载|N|proxy|
+|inverse|标识双向关联中被动的一方|N|false|

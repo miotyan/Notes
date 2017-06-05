@@ -152,17 +152,21 @@
     1. get 会在调用后立即向数据库发出 sql 语句，返回持久化对象。load 方法会在调用后返回一个代理对象。该代理对象只保存了实体对象的 id ，直到使用对象的非主键属性值时才会发出 sql 语句。
     2. 查询数据中不存在的数据时， get 方法返回 null ，load 方法抛出异常`org.hibernate.ObjectNotFoundExecption`
 
-### 一对多映射
+### 单向一对多映射
 如何实现一对多映射：
   - 数据库中，可以通过添加主外键的关联，表现一对多的关系
   - 在 Hibernate 中，通过在一方持有多方的集合实现，即在“一”的一端中使用`<set>`元素表示持有“多”的一端的对象。
 
 ```
-<set name="student" table="student">
+<set name="" table="">
 		<!-- 指定关联的外键列 -->
-		<key column="gid"></key>
-		<one-to-many class="com.imooc.entity.Student" />
+		<key column=""></key>
+		<one-to-many class="" />
 </set>
+name 是"多"的名字
+table 是"多"的表名
+column 是外键列名
+class 是"多"的实体类
 ```
   - set 元素的常用属性
 
@@ -172,3 +176,27 @@
 |table|关联类的目标数据库表|N||
 |lazy|指定关联对象是否使用延迟加载|N|proxy|
 |inverse|标识双向关联中被动的一方|N|false|
+
+### 单向多对一映射
+在"多"的实体类添加"一"的属性和`get set`方法，然后在"多"的对象关系映射文件中配置多对一关联关系
+```
+<many-to-one name="" class="" column=""></many-to-one>
+```
+`name`是"一"的名字，`class`是"一"的实体类，`column`是"一"对应的数据库表主键
+### 双向多对一映射
+在这种关系中，既可以方便的由学生查找到对应的班级信息，也可以方便的由班级查找到其所包含的学生信息。
+- 在双方的对象关系映射文件中都配置关联关系
+- inverse 属性
+  - `<set>`节点的 inverse 属性指定关联关系的控制方向，默认由"一"方来维护
+  - 关联关系中，inverse="false" 则为主动方，由主动方负责维护关联关系
+  - 在一对多关联中，只能设置"一"方的 inverse 为 true ，这将有利于性能的改善
+- cascade 属性
+  - 当设置了 cascade 属性不为 none 时，Hibernate 会自动持久化所关联的对象
+  - cascade 属性的设置会带来性能上的变动，需谨慎设置
+
+|属性值|含义和作用|
+|---|---|
+|all|对所有操作进行级联操作|
+|save-update|执行保存和更新操作时进行级联操作|
+|delete|执行删除时进行级联操作|
+|none|对所有操作不进行级联操作|

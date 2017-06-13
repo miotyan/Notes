@@ -245,9 +245,14 @@ class 是"多"的实体类
 > 二级缓存是所有 session 共用的缓存，在某个 session 中缓存后，可以在其他 session 中直接使用。二级缓存不是默认开启的，需要手动配置
 
   - 二级缓存配置步骤
-    1. 添加二级缓存对应的 jar 包<br />
-       jar 包名称 ehcache
-    2. 在 hibernate 的配置文件中添加 Provider 类的描述<br />
+    1. 添加二级缓存对应的 jar 包
+    2. 在 hibernate 的配置文件中开启二级缓存，添加 Provider 类的描述<br />
+      ```
+      <!-- 开启二级缓存 -->
+      <property name="hibernate.cache.use_second_level_cache">true</property>
+      <!-- 注册二级缓存工厂 -->
+	    <property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+      ```
     3. 添加二级缓存的属性配置文件<br />
-      在实体类的 hbm.xml 文件中的 class 标签下添加 `<cache usage="read-only"/>`
+       在 id 标签前面加上`<cache usage="read-only"/>`
     4. 在需要被缓存的表所对应的映射文件中添加`<cache />`标签
